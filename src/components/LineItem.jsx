@@ -6,7 +6,7 @@ const LineItem = ({ item, handleCheck, handleDelete }) => {
         <li className="flex justify-between items-center bg-slate-400 px-3 py-0.5 rounded-md">
             <input type="checkbox" checked={item.checked} onChange={() => handleCheck(item.id)} />
             <label onDoubleClick={() => handleCheck(item.id)}
-                className={`cursor-pointer ${item.checked ? 'line-through' : ''}`}>
+                className={`cursor-pointer text-2xl ${item.checked ? 'line-through' : ''}`}>
                 {item.item}
             </label>
             <button onClick={() => handleDelete(item.id)} title={`Delete ${item.item}`}

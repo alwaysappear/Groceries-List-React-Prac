@@ -2,16 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-#root {
-  @apply h-screen flex flex-col justify-between items-center text-center;
+body {
+  @apply w-full text-center;
   user-select: none;
 }
 
-main {
-  @apply w-full grid place-items-center;
+#root {
+  @apply grid place-items-center;
+}
+
+.container {
+  @apply w-full max-w-[500px] grid place-items-center;
 }
 
 header,
 footer {
   @apply w-screen bg-blue-700 p-0.5;
+}
+
+.trans {
+  @apply transition-all duration-200 ease-linear;
 }
