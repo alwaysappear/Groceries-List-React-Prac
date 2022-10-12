@@ -1,7 +1,7 @@
-const Footer = ({ length }) => {
+const Footer = ({ count }) => {
     return (
         <footer>
-            <p>{length <= 1 ? `${length} List Item.` : `${length} List Items.`}</p>
+            <p>{count <= 1 ? `${count} List Item.` : `${count} List Items.`}</p>
         </footer>
     )
 }

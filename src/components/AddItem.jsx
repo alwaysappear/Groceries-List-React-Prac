@@ -1,13 +1,13 @@
 import { FaPlus } from 'react-icons/fa'
 import { useState, useRef } from 'react'
 
-const AddItem = ({ onAdd }) => {
+const AddItem = ({ onAddItem }) => {
     const [item, setItem] = useState("")
-    const inputRef = useRef();
+    const inputRef = useRef()
 
     const submit = (e) => {
-        e.preventDefault();
-        onAdd({ item })
+        e.preventDefault()
+        onAddItem({ item })
         setItem("")
     }
 
