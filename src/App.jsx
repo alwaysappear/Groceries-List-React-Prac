@@ -6,26 +6,31 @@ import AddItem from './components/AddItem'
 import SearchItem from './components/SearchItem'
 
 function App() {
-  const API_URL = "http://localhost:5050/items"
+  const API_URL = "http://localhost:3500/items"
   const [items, setItems] = useState([])
   const [search, setSearch] = useState("")
-  const [fetchErr, setFetchErr] = useState(null);
+  const [fetchErr, setFetchErr] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
 
   useEffect(() => {
     const fetchItems = async () => {
       try {
         const res = await fetch(API_URL)
-        if (!res.ok) throw new Error("High Latency!")
+        if (!res.ok) throw new Error("Couldn't fetch data.")
         const listItems = await res.json()
         setItems(listItems)
         setFetchErr(null)
       } catch (err) {
-        console.log(err.message)
+        setFetchErr(err.message)
+      } finally {
+        setIsLoading(false)
       }
     }
 
-    (async () => await fetchItems())()
+    setTimeout(() => {
+      (async () => await fetchItems())()
+    }, 2000)
   }, [])
 
   const checkItem = id => {
@@ -69,7 +74,11 @@ function App() {
       <div className="container">
         <SearchItem search={search} onSetSearch={setSearch} />
         <AddItem onAddItem={addItem} />
-        <Content items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))} handleCheck={checkItem} handleDelete={deleteItem} />
+        <main>
+          {isLoading && <p>Loading Items...</p>}
+          {fetchErr && <p className='text-xl text-red-600'>{`Error: ${fetchErr}`}</p>}
+          {!fetchErr && !isLoading && <Content items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))} handleCheck={checkItem} handleDelete={deleteItem} handleLoading={isLoading} />}
+        </main>
       </div>
       <Footer count={items.length} />
     </>
