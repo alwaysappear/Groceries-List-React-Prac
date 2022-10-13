@@ -6,31 +6,39 @@ import AddItem from './components/AddItem'
 import SearchItem from './components/SearchItem'
 
 function App() {
-  const getItemsFromLocalStorage = JSON.parse(localStorage.getItem('shoppinglist'))
-  const getItems = getItemsFromLocalStorage === null ? [] : getItemsFromLocalStorage
-  const [items, setItems] = useState(getItems)
+  const API_URL = "http://localhost:5050/items"
+  const [items, setItems] = useState([])
   const [search, setSearch] = useState("")
+  const [fetchErr, setFetchErr] = useState(null);
+
 
   useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const res = await fetch(API_URL)
+        if (!res.ok) throw new Error("High Latency!")
+        const listItems = await res.json()
+        setItems(listItems)
+        setFetchErr(null)
+      } catch (err) {
+        console.log(err.message)
+      }
+    }
 
+    (async () => await fetchItems())()
   }, [])
 
-  const setAndSaveItems = (newItems) => {
-    setItems(newItems)
-    localStorage.setItem('shoppinglist', JSON.stringify(newItems))
-  }
-
-  const checkItem = (id) => {
+  const checkItem = id => {
     const listItems = [...items.map(item => item.id === id ? { ...item, checked: !item.checked } : item)]
-    setAndSaveItems(listItems)
+    setItems(listItems)
   }
 
-  const deleteItem = (id) => {
+  const deleteItem = id => {
     const listItems = [...items.filter(item => item.id !== id)]
-    setAndSaveItems(listItems)
+    setItems(listItems)
   }
 
-  const addItem = (item) => {
+  const addItem = item => {
     let id = 0
     const [IDList, newArr] = [[], []]
     items.forEach(item => {
@@ -52,7 +60,7 @@ function App() {
     }
     const newItem = { id, checked: false, ...item }
     const listItems = [...items, newItem]
-    setAndSaveItems(listItems)
+    setItems(listItems)
   }
 
   return (
