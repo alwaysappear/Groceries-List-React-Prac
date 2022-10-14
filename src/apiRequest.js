@@ -2,6 +2,7 @@ const apiRequest = async (url='', optionsObj=null, errMsg=null) => {
     try {
         const res = await fetch(url, optionsObj)
         if (!res.ok) throw new Error("Please, reload the site.")
+        return res.json()
     } catch (err) {
         errMsg = err.message
     } finally {

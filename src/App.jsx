@@ -8,12 +8,15 @@ import apiRequest from './apiRequest'
 
 function App() {
   const API_URL = "http://localhost:3500/items"
+
+  //Initialization
   const [items, setItems] = useState([])
   const [search, setSearch] = useState("")
   const [fetchErr, setFetchErr] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
 
+  // Fetch data from API server
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -34,34 +37,45 @@ function App() {
     }, 2000)
   }, [])
 
+
+
+  // Handle Delete
+  const deleteItem = async id => {
+    const listItems = [...items.filter(item => item.id !== id)]
+    setItems([...listItems])
+
+    const remOption = {
+      method: 'DELETE'
+    }
+
+    const requestUrl = `${API_URL}/${id}`
+    const result = await apiRequest(requestUrl, remOption)
+    if (result) setFetchErr(result)
+  }
+
+
+  // Handle Check
   const checkItem = async id => {
     const listItems = items.map(item => item.id === id ? { ...item, checked: !item.checked } : item)
     setItems(listItems)
 
     const newItem = listItems.filter(item => item.id === id)
 
-    console.log(newItem[0].checked)
-
+    const requestUrl = `${API_URL}/${id}`
     const updateOptions = {
       method: 'PATCH',
-      header: {
+      headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ checked: newItem[0].checked })
     }
 
-    const requestUrl = `${API_URL}/${id}`
     const result = await apiRequest(requestUrl, updateOptions)
     if (result) setFetchErr(result)
   }
 
-  // Delete Item
-  const deleteItem = id => {
-    const listItems = [...items.filter(item => item.id !== id)]
-    setItems(listItems)
-  }
 
-  // Add Item
+  // Handle Add Item
   const addItem = async item => {
     let id = 0
     const [IDList, newArr] = [[], []]
