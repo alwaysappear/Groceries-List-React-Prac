@@ -4,6 +4,7 @@ import Content from './components/Content'
 import Footer from './components/Footer'
 import AddItem from './components/AddItem'
 import SearchItem from './components/SearchItem'
+import apiRequest from './apiRequest'
 
 function App() {
   const API_URL = "http://localhost:3500/items"
@@ -33,17 +34,35 @@ function App() {
     }, 2000)
   }, [])
 
-  const checkItem = id => {
-    const listItems = [...items.map(item => item.id === id ? { ...item, checked: !item.checked } : item)]
+  const checkItem = async id => {
+    const listItems = items.map(item => item.id === id ? { ...item, checked: !item.checked } : item)
     setItems(listItems)
+
+    const newItem = listItems.filter(item => item.id === id)
+
+    console.log(newItem[0].checked)
+
+    const updateOptions = {
+      method: 'PATCH',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ checked: newItem[0].checked })
+    }
+
+    const requestUrl = `${API_URL}/${id}`
+    const result = await apiRequest(requestUrl, updateOptions)
+    if (result) setFetchErr(result)
   }
 
+  // Delete Item
   const deleteItem = id => {
     const listItems = [...items.filter(item => item.id !== id)]
     setItems(listItems)
   }
 
-  const addItem = item => {
+  // Add Item
+  const addItem = async item => {
     let id = 0
     const [IDList, newArr] = [[], []]
     items.forEach(item => {
@@ -66,6 +85,16 @@ function App() {
     const newItem = { id, checked: false, ...item }
     const listItems = [...items, newItem]
     setItems(listItems)
+
+    const postOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newItem)
+    }
+    const result = await apiRequest(API_URL, postOptions)
+    if (result) setFetchErr(result)
   }
 
   return (
