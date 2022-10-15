@@ -2,83 +2,28 @@
   "items": [
     {
       "id": 1,
-      "checked": false,
+      "checked": true,
       "item": "Bread"
     },
     {
       "id": 2,
-      "checked": false,
-      "item": "Noodles"
-    },
-    {
-      "id": 3,
       "checked": true,
-      "item": "Pizza"
-    },
-    {
-      "id": 5,
-      "checked": false,
-      "item": "fkkfbf"
+      "item": "Noodles"
     },
     {
       "id": 4,
       "checked": true,
-      "item": "kdvbvkbd"
+      "item": "Yam"
     },
     {
-      "id": 7,
+      "id": 5,
       "checked": true,
-      "item": "bfkbn"
+      "item": "Sweet"
     },
     {
-      "id": 8,
-      "checked": true,
-      "item": "bfkbnfbkfnb"
-    },
-    {
-      "id": 9,
+      "id": 3,
       "checked": false,
-      "item": "fknbfkb"
-    },
-    {
-      "id": 10,
-      "checked": false,
-      "item": "fbfkbnfkb"
-    },
-    {
-      "id": 11,
-      "checked": false,
-      "item": "fbkfnbk"
-    },
-    {
-      "id": 13,
-      "checked": false,
-      "item": "fenkgneg"
-    },
-    {
-      "id": 14,
-      "checked": false,
-      "item": "eglenglkneg"
-    },
-    {
-      "id": 15,
-      "checked": false,
-      "item": "eglnelgneg"
-    },
-    {
-      "id": 12,
-      "checked": false,
-      "item": "kkdb"
-    },
-    {
-      "id": 16,
-      "checked": false,
-      "item": "lndkd"
-    },
-    {
-      "id": 17,
-      "checked": false,
-      "item": "dnld"
+      "item": "Pizza"
     }
   ]
 }
