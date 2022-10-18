@@ -3,27 +3,32 @@
     {
       "id": 1,
       "checked": true,
-      "item": "Bread"
-    },
-    {
-      "id": 2,
-      "checked": true,
       "item": "Noodles"
     },
     {
-      "id": 4,
-      "checked": true,
-      "item": "Yam"
-    },
-    {
-      "id": 5,
-      "checked": true,
-      "item": "Sweet"
+      "id": 2,
+      "checked": false,
+      "item": "Pizza"
     },
     {
       "id": 3,
       "checked": false,
-      "item": "Pizza"
+      "item": "Ice Cream"
+    },
+    {
+      "id": 4,
+      "checked": true,
+      "item": "Yam & Eggs"
+    },
+    {
+      "id": 5,
+      "checked": true,
+      "item": "Beans & Plantain"
+    },
+    {
+      "id": 6,
+      "checked": false,
+      "item": "Semolina & Vegetable"
     }
   ]
 }
