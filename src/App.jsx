@@ -42,7 +42,7 @@ function App() {
   // Handle Delete
   const deleteItem = async id => {
     const listItems = [...items.filter(item => item.id !== id)]
-    setItems([...listItems])
+    setItems(listItems)
 
     const remOption = {
       method: 'DELETE'
