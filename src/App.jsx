@@ -37,7 +37,7 @@ function App() {
     }, 2000)
   }, [])
 
-
+  console.log(items)
 
   // Handle Delete
   const deleteItem = async id => {
